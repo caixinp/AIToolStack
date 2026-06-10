@@ -1,0 +1,44 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ai-edge-litert>=1.2.0,<1.4.0",
+    "aiofiles==23.2.1",
+    "amqtt==0.11.0",
+    "fastapi==0.104.1",
+    "hydra-core>=1.3.2",
+    "munch>=4.0.0",
+    "onnx>=1.12.0,<=1.19.1",
+    "onnx-graphsurgeon>=0.3.26",
+    "onnx2tf>=1.26.3",
+    "onnxruntime>=1.26.0",
+    "onnxslim>=0.1.71",
+    "paho-mqtt==1.6.1",
+    "passlib[bcrypt]==1.7.4",
+    "pillow==10.1.0",
+    "pydantic==2.5.0",
+    "pydantic-settings==2.1.0",
+    "python-jose[cryptography]==3.3.0",
+    "python-multipart==0.0.6",
+    "pyyaml==6.0.2",
+    "sng4onnx>=1.0.1",
+    "sqlalchemy==2.0.23",
+    "tensorflow>=2.0.0,<=2.19.0",
+    "tf-keras<=2.19.0",
+    "ultralytics>=8.3.229",
+    "uvicorn[standard]==0.24.0",
+    "websockets==15.0.1",
+]
+
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/backend"]

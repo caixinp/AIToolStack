@@ -1931,6 +1931,7 @@ class MQTTService:
                         except: pass
                         # #endregion
                     else:
+                        print(f"{ep["host"]}:{ep["port"]} is non-TLS, using configured keepalive={keepalive} seconds")
                         client.connect(ep["host"], ep["port"], keepalive=keepalive)
                     print(f"[MQTT Service] ✓ connect() call completed for {ep['type']} broker")
                     logger.info(f"[MQTT Service] connect() call completed, starting loop for {ep['type']} broker")

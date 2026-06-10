@@ -22,7 +22,7 @@ if [ -f "/.dockerenv" ]; then
             if [ "$(ls -A $NE301_HOST_DIR 2>/dev/null)" ]; then
                 rm -rf "$NE301_HOST_DIR"/*
             fi
-            git clone https://github.com/camthink-ai/ne301.git "$NE301_HOST_DIR"
+            git clone git@github.com:caixinp/ne301.git "$NE301_HOST_DIR"
             echo "[NE301 Init] Clone completed"
         else
             echo "[NE301 Init] Complete NE301 project found in host directory, skipping clone"
@@ -36,7 +36,7 @@ if [ -f "/.dockerenv" ]; then
         NE301_CONTAINER_DIR="/app/ne301"
         if [ ! -d "$NE301_CONTAINER_DIR" ]; then
             echo "[NE301 Init] Cloning to container internal directory..."
-            git clone https://github.com/camthink-ai/ne301.git "$NE301_CONTAINER_DIR"
+            git clone git@github.com:caixinp/ne301.git "$NE301_CONTAINER_DIR"
         fi
     fi
 else
@@ -47,7 +47,7 @@ else
     
     if [ ! -d "$NE301_DIR" ]; then
         echo "[NE301 Init] Cloning NE301 project to: $NE301_DIR"
-        git clone https://github.com/camthink-ai/ne301.git "$NE301_DIR"
+        git clone git@github.com:caixinp/ne301.git "$NE301_DIR"
     else
         echo "[NE301 Init] NE301 project directory already exists: $NE301_DIR"
     fi

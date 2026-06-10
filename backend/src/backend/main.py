@@ -105,7 +105,8 @@ def health_check():
 
 # Static file configuration (for serving frontend build artifacts in Docker deployment)
 # Note: Must be registered after API routes and health endpoint to avoid intercepting them
-FRONTEND_BUILD_DIR = Path(__file__).parent.parent / "frontend" / "build"
+# FRONTEND_BUILD_DIR = Path(__file__).parent.parent / "frontend" / "build"
+FRONTEND_BUILD_DIR = Path("./frontend/build")
 if FRONTEND_BUILD_DIR.exists():
     # Mount static file directory
     app.mount("/static", StaticFiles(directory=str(FRONTEND_BUILD_DIR / "static")), name="static")
