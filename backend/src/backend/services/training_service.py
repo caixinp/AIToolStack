@@ -658,13 +658,19 @@ class TrainingService:
 
                 # Prepare training parameters (following ultralytics documentation)
                 # Use training_id to generate unique training directory name, avoid overwriting multiple trainings
+                # Determine the project root directory for saving training output
+                # dataset_path is typically: datasets/{project_id}/yolo_export
+                # We want training output to go to: datasets/{project_id}/train_{training_id}
+                # So we use the parent of dataset_path (i.e., datasets/{project_id}) as the project directory
+                # IMPORTANT: Use absolute path to prevent YOLO from using its default runs/detect/ directory
+                project_root_dir = str(dataset_path.parent.resolve())  # e.g., /absolute/path/to/datasets/c624a3ff
                 train_args = {
                     'data': str(dataset_path / "data.yaml"),
                     'epochs': epochs,
                     'imgsz': imgsz,
                     'batch': batch,
                     'device': device,
-                    'project': str(dataset_path.parent),
+                    'project': project_root_dir,  # Save to project root (e.g., datasets/c624a3ff)
                     'name': f'train_{training_id}',  # Use training_id to ensure each training has unique directory
                     'exist_ok': False,  # Changed to False, as each training should use new directory
                     # Note: 'timeout' is NOT a valid YOLO parameter, removed

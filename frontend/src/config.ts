@@ -3,13 +3,13 @@
 // In Docker, frontend is served by the same backend server, so relative paths work
 // For local development, can override with REACT_APP_API_URL environment variable
 const getApiBaseUrl = () => {
-  if (process.env.REACT_APP_API_URL) {
-    return process.env.REACT_APP_API_URL;
-  }
-  // Use relative path for Docker/production, fallback to localhost for local dev
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return 'http://localhost:8000/api';
-  }
+  // if (process.env.REACT_APP_API_URL) {
+  //   return process.env.REACT_APP_API_URL;
+  // }
+  // // Use relative path for Docker/production, fallback to localhost for local dev
+  // if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+  //   return 'http://localhost:8000/api';
+  // }
   return '/api';
 };
 

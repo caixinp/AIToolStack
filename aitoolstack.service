@@ -10,13 +10,11 @@ Group=chakcy
 WorkingDirectory=/home/chakcy/AIToolStack
 Environment="TZ=Asia/Shanghai"
 ExecStartPre=/home/chakcy/AIToolStack/scripts/init-ne301.sh
-ExecStart=/home/chakcy/.local/bin/uv run python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000
+ExecStart=/home/chakcy/.local/bin/uv run python -m gunicorn backend.main:app -k uvicorn.workers.UvicornWorker -w 4 -b 0.0.0.0:8000
 Restart=on-failure
 RestartSec=5
 StandardOutput=journal
 StandardError=journal
-MemoryMax=1024M
-CPUQuota=80%
 
 [Install]
 WantedBy=multi-user.target

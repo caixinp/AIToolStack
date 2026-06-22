@@ -6,7 +6,13 @@ from datetime import datetime
 from backend.config import settings
 
 Base = declarative_base()
-engine = create_engine(settings.DATABASE_URL, connect_args={"check_same_thread": False})
+engine = create_engine(
+    settings.DATABASE_URL, 
+    connect_args={
+        "check_same_thread": False,
+        "timeout": 10  # Increase timeout to handle potential database locks during concurrent access
+    },
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

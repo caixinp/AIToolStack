@@ -1864,12 +1864,23 @@ def export_tflite_model(
     try:
         from ultralytics import YOLO
         model = YOLO(model_path)
+        
+        # Determine the training directory to save TFLite export to the same location as training output
+        # The training saves to: datasets/{project_id}/train_{training_id}/weights/
+        # We want TFLite export to also go there, not to Ultralytics' default runs/detect/
+        training_weights_dir = Path(model_path).parent  # e.g., .../train_{training_id}/weights/
+        training_project_dir = training_weights_dir.parent.parent  # e.g., .../datasets/{project_id}/
+        export_name = training_weights_dir.parent.name  # e.g., train_{training_id}
+        
         export_path = model.export(
             format='tflite',
             imgsz=imgsz,
             int8=int8,
             data=str(data_yaml),
-            fraction=fraction
+            fraction=fraction,
+            project=str(training_project_dir),
+            name=export_name,
+            exist_ok=True,
         )
         # export_path might be Path or str
         export_path = Path(export_path)

@@ -63,3 +63,8 @@ mosquitto/config/certs/*
 !mosquitto/config/certs/.gitkeep
 mosquitto/config/certs/**/*
 !mosquitto/config/certs/.gitkeep
+
+# model
+*.npy
+*.pt
+outputs/
